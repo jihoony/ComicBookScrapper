@@ -50,7 +50,7 @@ public class ComicBookScrapper {
 
                         });
 
-                final Elements nextLinkElements = document.select(".blog-pager-newer-link");
+                final Elements nextLinkElements = document.select("#Blog1_blog-pager-newer-link");
                 final Element nextLinkElement = nextLinkElements.first();
 
                 final String nextUrl = nextLinkElement.attr("href");
