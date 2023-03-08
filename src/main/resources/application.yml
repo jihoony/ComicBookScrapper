@@ -1,0 +1,12 @@
+localDirectory: /Users/jihoon_yang/Desktop/Untitle/
+items:
+  -
+    name: 슬램덩크
+    url: http://huggiescomics.blogspot.com/2016/09/1_34.html
+    count: 24
+    skip: true
+  -
+    name: 상남2인조
+    url: http://huggiescomics.blogspot.com/2016/09/2-1.html
+    count: 15
+    skip: false
