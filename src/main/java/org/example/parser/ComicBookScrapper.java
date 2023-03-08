@@ -20,6 +20,43 @@ import java.util.stream.IntStream;
 
 @Slf4j
 public class ComicBookScrapper {
+
+    public static void traversal(String startUrl, int count, boolean direction){
+        String bookUrl = startUrl;
+
+        for (int i = 0 ; i < count ; i ++ ) {
+
+            final Connection connect = Jsoup.connect(bookUrl);
+
+            try {
+                final Document document = connect.get();
+                final String title = document.title().replaceAll("huggiescomics:", "").trim();
+
+                final String cssSelector = direction ? "#Blog1_blog-pager-newer-link" : "#Blog1_blog-pager-older-link";
+
+                Elements nextLinkElements = document.select(cssSelector);
+
+                final Element nextLinkElement = nextLinkElements.first();
+
+                if (nextLinkElement != null) {
+                    final String nextUrl = nextLinkElement.attr("href");
+
+                    log.debug("title: {} bookUrl: {} nextUrl: {}", title, bookUrl, nextUrl);
+
+                    bookUrl = nextUrl;
+                } else {
+                    log.debug("title: {} bookUrl: {}", title, bookUrl);
+                    log.debug("no more link");
+                    break;
+                }
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+
     public static void start(final String startUrl, int bookCount, String dstPath) {
 
         createNotExistingDirectory(dstPath);

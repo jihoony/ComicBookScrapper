@@ -9,6 +9,19 @@ import org.example.payload.ConfigPayload;
 @Slf4j
 public class Main {
     public static void main(String[] args) {
+        traversal();
+//        getFiles();
+    }
+
+    public static void traversal(){
+        final String url = "http://huggiescomics.blogspot.com/2016/09/1.html";
+        boolean forward = true;
+        int count = 1000;
+
+        ComicBookScrapper.traversal(url, count, forward);
+    }
+
+    public static void getFiles(){
 
         ConfigReader configReader = new YamlConfigReader();
         ConfigPayload payload = configReader.read("application.yml", ConfigPayload.class);
@@ -24,14 +37,5 @@ public class Main {
                 ComicBookScrapper.start(url, count, payload.getLocalDirectory() + "/"+ name);
             }
         });
-    }
-
-    public static void test(){
-
-        final String startUrl = "http://huggiescomics.blogspot.com/2016/09/1_34.html";
-        final int bookCount = 24;
-        final String path = "/Users/jihoon_yang/Desktop/Untitle/슬램덩크/";
-
-        ComicBookScrapper.start(startUrl, bookCount, path);
     }
 }
